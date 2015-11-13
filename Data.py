@@ -32,7 +32,7 @@ class Data:
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
         if pygame.K_ESCAPE in newkeys:
             dynamicConfig.paused = not dynamicConfig.paused
-            print dynamicConfig.paused
+
 
         if pygame.K_1 in newkeys:
             dynamicConfig.whatGame = 0
@@ -42,22 +42,34 @@ class Data:
             dynamicConfig.whatGame = 1
             CON.runGame()
 
+        if dynamicConfig.health <= 0:
+            dynamicConfig.whatGame = 99
+            dynamicConfig.health = .1
+            CON.runGame()
+
+
         clock = pygame.time.Clock()
         milliseconds = clock.tick(CON.FPS)  # milliseconds passed since last frame
         seconds = milliseconds / 1000.0
+
+
+
         return
 
 
 
     def draw(self,surface):
         rect = pygame.Rect(0,0,self.width,self.height)
-        surface.fill((0,0,0),rect )
+        surface.fill((55,55,55),rect )
         return
 
     def drawPaused(self,surface):
         rect = pygame.Rect(0,0,self.width,self.height)
         surface.fill((255,255,255),rect )
         return
+
+    def playNewGame(self):
+        pass
 
 
     def drawTextLeft(self, surface, text, color, x, y,font):
