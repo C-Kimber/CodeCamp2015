@@ -41,6 +41,10 @@ class Data:
         if pygame.K_2 in newkeys:
             dynamicConfig.whatGame = 1
             CON.runGame()
+
+        clock = pygame.time.Clock()
+        milliseconds = clock.tick(CON.FPS)  # milliseconds passed since last frame
+        seconds = milliseconds / 1000.0
         return
 
 
