@@ -1,10 +1,10 @@
 import pygame
-
+import CONSTANTCONFIG as CON
 from Adventure import Adventure
 
 def main():
     pygame.font.init()
-    l = Adventure(800, 600, 30)
+    l = Adventure(CON.SCREEN_WIDTH, CON.SCREEN_HEIGHT, CON.FPS)
     l.main_loop()
     return
 

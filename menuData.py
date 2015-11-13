@@ -1,7 +1,6 @@
 __author__ = 'Kimbe'
 import pygame
 import dynamicConfig
-import CONSTANTCONFIG as CON
 import random
 
 
@@ -30,29 +29,14 @@ class Data:
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
-        if pygame.K_ESCAPE in newkeys:
-            dynamicConfig.paused = not dynamicConfig.paused
-            print dynamicConfig.paused
 
-        if pygame.K_1 in newkeys:
-            dynamicConfig.whatGame = 0
-            CON.runGame()
-
-        if pygame.K_2 in newkeys:
-            dynamicConfig.whatGame = 1
-            CON.runGame()
         return
 
 
 
     def draw(self,surface):
-        rect = pygame.Rect(0,0,self.width,self.height)
-        surface.fill((0,0,0),rect )
-        return
-
-    def drawPaused(self,surface):
-        rect = pygame.Rect(0,0,self.width,self.height)
-        surface.fill((255,255,255),rect )
+        rect = pygame.Rect(0,0,self.width/2,self.height/2)
+        surface.fill((YELLOW),rect)
         return
 
 

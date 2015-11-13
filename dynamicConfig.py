@@ -1,1 +1,2 @@
-#nothing in here right now
+paused = False
+whatGame = 0

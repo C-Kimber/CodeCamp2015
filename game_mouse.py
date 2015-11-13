@@ -41,11 +41,6 @@ class Game:
                     pygame.quit()
                     return
 
-                # did the user just press the escape key?
-                if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    return
-
                 # track which mouse buttons are currently pressed
                 if e.type == pygame.MOUSEBUTTONDOWN:
                     buttons.add(e.button)
