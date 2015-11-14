@@ -1,4 +1,5 @@
 import main
+import dynamicConfig as dyn
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
@@ -16,3 +17,9 @@ def button(self,mx,my, x, y, w, h):
 def hover(self,mx,my, x, y, w, h):
     if x <= mx <= x + w and y <= my <= y + h:
         return True
+
+
+def reset():
+    dyn.health = 3
+    dyn.completedGames = 0
+    dyn.score = 0

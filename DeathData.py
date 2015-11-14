@@ -59,9 +59,8 @@ class DeadData:
             surface.fill((155,155,155),rect )
         if self.button(x, y, w, h):
             dynamicConfig.whatGame = 0
+            CON.reset()
             CON.runGame()
-            print "click"
-
 
 
         return

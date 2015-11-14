@@ -1,6 +1,6 @@
 import CONSTANTCONFIG as CON
 paused = False
-whatGame = 0
+whatGame = 3
 health = 1
 completedGames = 0
 score = 0

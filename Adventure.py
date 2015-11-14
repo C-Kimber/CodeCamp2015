@@ -5,6 +5,7 @@ from Data import Data
 from menuData import Data as menuData
 from RaindanceData import RaindanceData
 from DeathData import DeadData
+from chugData import Data as chugData
 
 class Adventure(Game):
 
@@ -37,6 +38,8 @@ class Adventure(Game):
             data = menuData(width, height, frame_rate)
         elif dynamicConfig.whatGame == 1:
             data = RaindanceData(width, height, frame_rate)
+        elif dynamicConfig.whatGame == 3:
+            data = chugData(width, height, frame_rate)
 
         else:
             data = DeadData(width,height,frame_rate)

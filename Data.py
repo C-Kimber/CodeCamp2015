@@ -68,8 +68,7 @@ class Data:
         surface.fill((255,255,255),rect )
         return
 
-    def playNewGame(self):
-        pass
+
 
 
     def drawTextLeft(self, surface, text, color, x, y,font):
