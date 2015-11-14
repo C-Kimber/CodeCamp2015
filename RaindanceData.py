@@ -56,29 +56,30 @@ class RaindanceData:
             self.player.moveRight()
         if self.player.health <= 0:
             dynamicConfig.health -= 1
-            dynamicConfig.whatGame = 0
+            dynamicConfig.whatGame = dynamicConfig.randGame()
             CON.runGame()
 
 
 
         clock = pygame.time.Clock()
-        self.milliseconds = clock.tick(CON.FPS)  # milliseconds passed since last frame
+        self.milliseconds = clock.tick(dynamicConfig.fps)  # milliseconds passed since last frame
         self.seconds = self.milliseconds / 1000.0
 
 
 
         self.player.tick(self.height, self.fieldwidth)
 
-        if self.milliseconds % 3 == 0:
+        if self.milliseconds % 4 == 0 or self.milliseconds % 3 == 0:
 
             self.addDrop()
 
         self.time -= self.seconds
 
         if self.time <= 0:
-            dynamicConfig.whatGame = 0
+            dynamicConfig.whatGame = dynamicConfig.randGame()
             dynamicConfig.completedGames += 1
             dynamicConfig.score += 50* self.player.health
+            self.time = 0.1
             CON.runGame()
 
 
@@ -115,12 +116,18 @@ class RaindanceData:
 
 
     def draw(self,surface):
+
+        background = pygame.image.load('Raindance/Rain sky.png').convert()
+        dropImage = pygame.image.load('Raindance/Tears.png').convert()
+        playerImage = pygame.image.load('Raindance/Nerd.png')
+        dropImage.set_colorkey((255,255,255))
         rect = pygame.Rect(0,0,self.fieldwidth,self.height)
         surface.fill((0,0,0),rect )
+        surface.blit(background,(0,0))
         myfont = self.font
         myfont2 = self.font2
         myfont3 = self.font_1
-        label = myfont.render("Time"+str(self.time), 1, (255, 255, 0))
+        label = myfont.render("Time"+str("%.2f" % round(self.time,2)), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 20))
         label = myfont.render("lives: "+str(self.player.health), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 60))
@@ -129,10 +136,12 @@ class RaindanceData:
         label = myfont3.render("games completed: "+str(dynamicConfig.completedGames), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 140))
 
-        self.player.draw(surface)
+        surface.blit(playerImage,(self.player.x-50,self.player.y-100))
+
+
 
         for drop in self.drops:
-            drop.draw(surface)
+            surface.blit(dropImage,(drop.x-90,drop.y-50))
         return
 
 

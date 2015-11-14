@@ -47,10 +47,10 @@ class Adventure(Game):
         elif dynamicConfig.whatGame == 3:
             data = chugData(width, height, frame_rate)
 
-        else:
+        elif dynamicConfig.whatGame == 99:
             data = DeadData(width,height,frame_rate)
         Game.__init__(self, name, width, height, frame_rate)
         self.data = data
-        self.bigData =Data(width,height, frame_rate)
+        self.bigData = Data(width,height, frame_rate)
         return
 

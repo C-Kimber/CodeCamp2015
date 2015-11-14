@@ -20,6 +20,7 @@ class DeadData:
         self.wy = 0
         self.buttonon = False
 
+
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
@@ -28,7 +29,8 @@ class DeadData:
             self.buttonon = True
         else:
             self.buttonon = False
-        return
+
+
 
     def button(self, x, y, w, h):
         mx, my = pygame.mouse.get_pos()
@@ -58,10 +60,9 @@ class DeadData:
         else:
             surface.fill((155,155,155),rect )
         if self.button(x, y, w, h):
-            dynamicConfig.whatGame = 0
+            dynamicConfig.whatGame = dynamicConfig.randGame()
             CON.reset()
             CON.runGame()
-
 
         return
 

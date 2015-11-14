@@ -40,7 +40,7 @@ class Data:
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
         (mouse_x,mouse_y) = mouse_position
         clock = pygame.time.Clock()
-        milliseconds = clock.tick(CON.FPS)
+        milliseconds = clock.tick(dynamicConfig.fps)
         seconds = milliseconds / 1000.0
         if 1 in newbuttons:
             self.buttonon = True
@@ -59,24 +59,28 @@ class Data:
         surface.blit(lable,(370,155))
         button = pygame.image.load('Pressedplaybutton.png').convert()
         button2 = pygame.image.load('Playbutton.png').convert()
-        if self.hover(200,200,200,100):
-            surface.blit(button, (450,350))
+
+        rect = pygame.Rect(450,350,100,50)
+        surface.fill((255,255,255),rect)
+        mx, my = pygame.mouse.get_pos()
+        x,y,w,h = rect
+        if self.hover(mx,my,x,y,w,h):
+            surface.blit(button, (x,y))
         else:
+         surface.blit(button2, (x,y))
 
-         surface.blit(button2, (450,350))
+        if self.button(mx,my,x,y,w,h) == True:
+            dynamicConfig.whatGame = dynamicConfig.randGame()
+            CON.runGame()
 
-        if self.button(200,200,200,100) == True:
-            print "pressed"
         return
 
-    def button(self, x, y, w, h):
-        mx, my = pygame.mouse.get_pos()
+    def button(self,mx,my, x, y, w, h):
         if x <= mx <= x + w and y <= my <= y + h:
             if self.buttonon == True:
                 return True
 
-    def hover(self, x, y, w, h):
-        mx, my = pygame.mouse.get_pos()
+    def hover(self,mx,my, x, y, w, h):
         if x <= mx <= x + w and y <= my <= y + h:
             return True
 

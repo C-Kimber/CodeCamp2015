@@ -9,6 +9,7 @@ class Blondie():
         self.x      = x
         self.y      = y
         self.color  = color
+        self.health = 15
         return
 
     def moveLeft(self, dx):

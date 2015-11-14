@@ -27,9 +27,14 @@ class Data:
         self.height = height
         self.upper_limit = self.width/2
 
+
+
+
+
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
+
         if pygame.K_ESCAPE in newkeys:
             dynamicConfig.paused = not dynamicConfig.paused
 
@@ -57,10 +62,10 @@ class Data:
 
 
         clock = pygame.time.Clock()
-        milliseconds = clock.tick(CON.FPS)  # milliseconds passed since last frame
+        milliseconds = clock.tick(dynamicConfig.fps)  # milliseconds passed since last frame
         seconds = milliseconds / 1000.0
 
-
+        dynamicConfig.fps = CON.FPS + dynamicConfig.completedGames
 
         return
 
