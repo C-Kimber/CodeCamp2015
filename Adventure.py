@@ -7,6 +7,9 @@ from RaindanceData import RaindanceData
 from DeathData import DeadData
 from chugData import Data as chugData
 
+from Blondness_in_the_trees import Data as blondData
+
+
 class Adventure(Game):
 
     def __init__(self, width, height, frame_rate):
@@ -28,6 +31,7 @@ class Adventure(Game):
         return
 
 
+
     def newGame(self,width, height, frame_rate):
         global data
         name = 'CodeCamp2015'
@@ -38,6 +42,8 @@ class Adventure(Game):
             data = menuData(width, height, frame_rate)
         elif dynamicConfig.whatGame == 1:
             data = RaindanceData(width, height, frame_rate)
+        elif dynamicConfig.whatGame == 2:
+            data = blondData(width,height,frame_rate)
         elif dynamicConfig.whatGame == 3:
             data = chugData(width, height, frame_rate)
 
@@ -47,3 +53,4 @@ class Adventure(Game):
         self.data = data
         self.bigData =Data(width,height, frame_rate)
         return
+

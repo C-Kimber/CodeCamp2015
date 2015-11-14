@@ -59,6 +59,8 @@ class RaindanceData:
             dynamicConfig.whatGame = 0
             CON.runGame()
 
+
+
         clock = pygame.time.Clock()
         self.milliseconds = clock.tick(CON.FPS)  # milliseconds passed since last frame
         self.seconds = self.milliseconds / 1000.0

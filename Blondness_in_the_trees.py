@@ -1,8 +1,10 @@
-__author__ = 'Kimbe'
+__author__ = 'Rob'
 import pygame
 import dynamicConfig
 import CONSTANTCONFIG as CON
+from blonde.blondie import Blondie
 import random
+
 
 
 RED = (255,0,0)
@@ -26,40 +28,26 @@ class Data:
         self.width  = width
         self.height = height
         self.upper_limit = self.width/2
-
+        self. time = 1
+        self.blonde = Blondie(20,20, self.width/2,self.height/2,(155,155,0))
+        try:
+            self.background = surface = pygame.image.load('blonde/tree.png').convert()
+        except:
+            print "can't import tree"
+        # surface = pygame.image.load('soda cans.png').convert()
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
-        if pygame.K_ESCAPE in newkeys:
-            dynamicConfig.paused = not dynamicConfig.paused
-
-
-        if pygame.K_1 in newkeys:
-            dynamicConfig.whatGame = 0
-            CON.runGame()
-
-        if pygame.K_2 in newkeys:
-            dynamicConfig.whatGame = 1
-            CON.runGame()
-
-        if pygame.K_3 in newkeys:
-            dynamicConfig.whatGame = 2
-            CON.runGame()
-
-        if pygame.K_4 in newkeys:
-            dynamicConfig.whatGame = 3
-            CON.runGame()
-
-        if dynamicConfig.health <= 0:
-            dynamicConfig.whatGame = 99
-            dynamicConfig.health = .1
-            CON.runGame()
-
-
+        (mouse_x,mouse_y) = mouse_position
         clock = pygame.time.Clock()
-        milliseconds = clock.tick(CON.FPS)  # milliseconds passed since last frame
+        milliseconds = clock.tick(CON.FPS)
         seconds = milliseconds / 1000.0
+        self.time -= seconds
+        if self.time <= 0:
+            self.blonde.x = random.randint(50,400)
 
+            self.blonde.y = random.randint (20, 200)
+            self.time = 1
 
 
         return
@@ -68,16 +56,10 @@ class Data:
 
     def draw(self,surface):
         rect = pygame.Rect(0,0,self.width,self.height)
-        surface.fill((55,55,55),rect )
+        surface.fill((0,191,255),rect )
+        surface.blit(self.background, (0,0))
+        self.blonde.draw(surface)
         return
-
-    def drawPaused(self,surface):
-        rect = pygame.Rect(0,0,self.width,self.height)
-        surface.fill((255,255,255),rect )
-        return
-
-
-
 
     def drawTextLeft(self, surface, text, color, x, y,font):
         textobj = font.render(text, False, color)

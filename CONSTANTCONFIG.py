@@ -1,9 +1,14 @@
 import main
+
 import dynamicConfig as dyn
+
+import pygame
+
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 FPS = 30
+
 
 
 def runGame():
