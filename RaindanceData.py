@@ -46,7 +46,7 @@ class RaindanceData:
 
         self.drops = []
 
-        self.time = 10
+        self.time = 30
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
@@ -73,7 +73,7 @@ class RaindanceData:
 
             self.addDrop()
 
-        self.time -= self.seconds
+        self.time -= self.seconds*10
 
         if self.time <= 0:
             dynamicConfig.whatGame = dynamicConfig.randGame()
@@ -127,7 +127,7 @@ class RaindanceData:
         myfont = self.font
         myfont2 = self.font2
         myfont3 = self.font_1
-        label = myfont.render("Time"+str("%.2f" % round(self.time,2)), 1, (255, 255, 0))
+        label = myfont.render("Time: "+str("%.2f" % round(self.time,2)), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 20))
         label = myfont.render("lives: "+str(self.player.health), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 60))
@@ -135,7 +135,8 @@ class RaindanceData:
         surface.blit(label, (self.fieldwidth, 100))
         label = myfont3.render("games completed: "+str(dynamicConfig.completedGames), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 140))
-
+        label = self.font2.render("Score: "+str(dynamicConfig.score), 1, (255, 255, 0))
+        surface.blit(label, (self.fieldwidth, 220))
         surface.blit(playerImage,(self.player.x-50,self.player.y-100))
 
 

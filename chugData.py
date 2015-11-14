@@ -22,7 +22,7 @@ class Data:
         self.buttonon = False
         self.onrect = False
         self.rect= pygame.Rect(self.width/2+150,self.height/2+100,80,60)
-        self.time = 25
+        self.time = 30
         self.chugpoints = 0
         self.point_at = 500
         self.dcans = 0
@@ -49,7 +49,7 @@ class Data:
         if self.chugpoints >= 100:
             self.chugpoints = 0
             self.dcans += 1
-        if self.dcans >= 3:
+        if self.dcans >= 1:
             dynamicConfig.score += 50
             dynamicConfig.whatGame = dynamicConfig.randGame()
             dynamicConfig.completedGames += 1
@@ -62,7 +62,7 @@ class Data:
         self.seconds = self.milliseconds / 1000.0
 
 
-        self.time -= self.seconds
+        self.time -= self.seconds*10
 
         if self.time <= 0:
             dynamicConfig.whatGame = dynamicConfig.randGame()
@@ -126,6 +126,8 @@ class Data:
         surface.blit(label, (self.fieldwidth, 140))
         label = self.font2.render("Completed: "+str(dynamicConfig.completedGames), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 180))
+        label = self.font2.render("Score: "+str(dynamicConfig.score), 1, (255, 255, 0))
+        surface.blit(label, (self.fieldwidth, 220))
 
 
 

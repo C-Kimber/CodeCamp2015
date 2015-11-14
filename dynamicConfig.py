@@ -8,7 +8,8 @@ score = 0
 fps = 60
 
 def randGame():
-    return random.randint(1,4)
+
+    return random.choice((1,2,3))
 
 
 

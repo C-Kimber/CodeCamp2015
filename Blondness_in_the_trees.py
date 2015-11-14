@@ -29,7 +29,7 @@ class Data:
         self.height = height
         self.fieldwidth = width - 200
         self.upper_limit = self.width/2
-        self.time = 10
+        self.time = 25
         self.time2 = 1
         self.blonde = Blondie(40,80, self.width/2,self.height/2,(155,155,0))
 
@@ -48,7 +48,7 @@ class Data:
         self.milliseconds = clock.tick(dynamicConfig.fps)  # milliseconds passed since last frame
         self.seconds = self.milliseconds / 1000.0
 
-        self.time -= self.seconds
+        self.time -= self.seconds*10
         self.time2 -= self.seconds*2
 
         if self.time2 <= 0:
@@ -127,6 +127,8 @@ class Data:
         surface.blit(label, (self.fieldwidth, 140))
         label = self.font2.render("Completed: "+str(dynamicConfig.completedGames), 1, (255, 255, 0))
         surface.blit(label, (self.fieldwidth, 180))
+        label = self.font2.render("Score: "+str(dynamicConfig.score), 1, (255, 255, 0))
+        surface.blit(label, (self.fieldwidth, 220))
 
 
 

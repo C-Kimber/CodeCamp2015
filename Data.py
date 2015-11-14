@@ -26,6 +26,7 @@ class Data:
         self.width  = width
         self.height = height
         self.upper_limit = self.width/2
+        self.buttonon = False
 
 
 
@@ -34,9 +35,14 @@ class Data:
         return
 
     def evolve(self, keys, newkeys, buttons, newbuttons, mouse_position):
+        if 1 in newbuttons:
+            self.buttonon = True
+        else:
+            self.buttonon = False
 
-        if pygame.K_ESCAPE in newkeys:
-            dynamicConfig.paused = not dynamicConfig.paused
+        if dynamicConfig.whatGame != 0:
+            if pygame.K_ESCAPE in newkeys:
+                dynamicConfig.paused = not dynamicConfig.paused
 
 
         if pygame.K_1 in newkeys:
@@ -76,9 +82,63 @@ class Data:
         surface.fill((55,55,55),rect )
         return
 
+    def button(self, x, y, w, h):
+        mx, my = pygame.mouse.get_pos()
+        if x <= mx <= x + w and y <= my <= y + h:
+            if self.buttonon == True:
+                return True
+
+    def hover(self, x, y, w, h):
+        mx, my = pygame.mouse.get_pos()
+        if x <= mx <= x + w and y <= my <= y + h:
+            return True
+
     def drawPaused(self,surface):
-        rect = pygame.Rect(0,0,self.width,self.height)
-        surface.fill((255,255,255),rect )
+        pygame.mouse.set_visible(True)
+        rect = pygame.Surface((self.width,self.height), pygame.SRCALPHA, 32)
+        rect.fill((0, 0, 0, 200))
+        surface.blit(rect, (0,0))
+
+        rect = pygame.Surface((self.width/3,self.height/3+200), pygame.SRCALPHA, 32)
+        rect.fill((0, 0, 0, 200))
+        surface.blit(rect, (self.width/2-200,150))
+        label = self.font.render(("Paused"), 1, (255, 255, 0))
+        surface.blit(label, (self.width/2-100,self.height/3))
+
+        rect = pygame.Surface((120,60), pygame.SRCALPHA, 32)
+
+
+
+        if self.hover(self.width/2-105,300,100,50):
+            rect.fill((55, 55, 55, 200))
+        else:
+            rect.fill((255, 255, 255, 200))
+        if self.button(self.width/2-105,300,100,50):
+            rect.fill((0, 0, 0, 200))
+            CON.reset()
+            dynamicConfig.whatGame = 0
+            dynamicConfig.paused = False
+            CON.runGame()
+
+
+        surface.blit(rect, (self.width/2-105,300))
+
+        label = self.font.render(("Restart"), 1, (0, 0, 0))
+        surface.blit(label, (self.width/2-100,self.height/2))
+
+        rect = pygame.Surface((120,50), pygame.SRCALPHA, 32)
+        if self.hover(self.width/2-105,400,100,50):
+            rect.fill((55, 55, 55, 200))
+        else:
+            rect.fill((255, 255, 255, 200))
+        if self.button(self.width/2-105,400,100,50):
+            rect.fill((0, 0, 0, 200))
+            dynamicConfig.paused = False
+
+        surface.blit(rect, (self.width/2-105,400))
+
+        label = self.font.render(("Resume"), 1, (0, 0, 0))
+        surface.blit(label, (self.width/2-100,self.height/2+100))
         return
 
 
