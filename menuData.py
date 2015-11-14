@@ -31,6 +31,7 @@ class Data:
         self.width  = width
         self.height = height
         self.upper_limit = self.width/2
+        self.buttonon = False
 
 
 
@@ -41,6 +42,10 @@ class Data:
         clock = pygame.time.Clock()
         milliseconds = clock.tick(CON.FPS)
         seconds = milliseconds / 1000.0
+        if 1 in newbuttons:
+            self.buttonon = True
+        else:
+            self.buttonon = False
 
         return
 
@@ -48,14 +53,32 @@ class Data:
 
     def draw(self,surface):
         background  = pygame.image.load('starsbackground.png').convert()
-        surface.blit(background, (100,0))
+        surface.blit(background, (0,0))
         myfont = self.font
         lable = myfont.render("Code Camp Stories", 1, (255,255,0))
-        surface.blit(lable,(100,100))
-        button = pygame.image.load('Playbutton.png').convert()
-        surface.blit(button, (200,200))
+        surface.blit(lable,(370,155))
+        button = pygame.image.load('Pressedplaybutton.png').convert()
+        button2 = pygame.image.load('Playbutton.png').convert()
+        if self.hover(200,200,200,100):
+            surface.blit(button, (450,350))
+        else:
+
+         surface.blit(button2, (450,350))
+
+        if self.button(200,200,200,100) == True:
+            print "pressed"
         return
 
+    def button(self, x, y, w, h):
+        mx, my = pygame.mouse.get_pos()
+        if x <= mx <= x + w and y <= my <= y + h:
+            if self.buttonon == True:
+                return True
+
+    def hover(self, x, y, w, h):
+        mx, my = pygame.mouse.get_pos()
+        if x <= mx <= x + w and y <= my <= y + h:
+            return True
 
     def drawTextLeft(self, surface, text, color, x, y,font):
         textobj = font.render(text, False, color)
